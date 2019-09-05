@@ -1,0 +1,14 @@
+### Excluding directories
+
+# Directories below will not be scanned at all
+exclude_paths:
+  - vendor
+  - tmp
+  - bin
+  - db/migrate
+  - app/uploaders
+
+detectors:
+  IrresponsibleModule:
+    enabled: false
+    exclude: []
