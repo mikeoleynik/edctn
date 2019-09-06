@@ -7,6 +7,7 @@ gem 'rails', '~> 5.2.3'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
 gem 'bootsnap', '>= 1.1.0', require: false
+gem 'haml-rails', '~> 2.0'
 gem 'bcrypt', '~> 3.1.7'
 gem 'jwt', '2.2.1'
 
