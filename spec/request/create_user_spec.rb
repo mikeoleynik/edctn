@@ -7,7 +7,7 @@ describe 'Send invite', type: :request do
     context 'authorized' do
       before {
         sign_in user
-        get '/invite'
+        post '/users'
       }
 
       it 'return status 200' do
@@ -21,7 +21,7 @@ describe 'Send invite', type: :request do
 
     context 'unauthorized' do
       it 'return 401 status if header Authorization is invalid ' do
-        get '/invite'
+        post '/users'
         expect(response.status).to eq 302
       end
     end

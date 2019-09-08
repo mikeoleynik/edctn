@@ -1,10 +1,8 @@
 # frozen_string_literal: true
 
-class InvitesController < ApplicationController
-  before_action :authenticate_user!
-
-  # GET /invite
-  def invite
+class UsersController < ApplicationController
+  # POST /users
+  def create
     User.invite!(email: 'new_user@example.com', fullname: 'John Doe')
     render json: { success: 'invite sent' }, status: :ok
   end
