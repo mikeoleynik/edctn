@@ -1,24 +1,13 @@
-# README
+## Getting Started
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This section provides quick start guide.
 
-Things you may want to cover:
+### Prerequisites
 
-* Ruby version
+- [Ruby](https://www.ruby-lang.org/en/): 2.6.3
+- [Ruby on Rails](https://rubyonrails.org/): 2.6.3
+- [PostgreSQL](https://www.postgresql.org/) 9.4 or higher.
 
-* System dependencies
+### Standard Installation
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+1. `bin/setup`
