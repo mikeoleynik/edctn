@@ -4,7 +4,10 @@ describe 'Visit to homepage', type: :request do
   describe 'GET /' do
     let!(:user) { create(:user) }
     context 'authorized' do
-      before { get '/', headers: { 'Authorization' => get_token(user.email, user.password) } }
+      before {
+        sign_in user
+        get '/'
+      }
 
       it 'return status 200' do
         expect(response.status).to eq 200
@@ -17,8 +20,8 @@ describe 'Visit to homepage', type: :request do
 
     context 'unauthorized' do
       it 'return 401 status if header Authorization is invalid ' do
-        get '/', headers: { 'Authorization' => '123' }
-        expect(response.status).to eq 401
+        get '/'
+        expect(response.status).to eq 302
       end
     end
   end
