@@ -7,10 +7,10 @@ assignees: ''
 
 ---
 
-**Describe feature**
+#### Describe feature
 
-**Describe user stories**
+#### Describe user stories
 
-**Describe logic**
+#### Describe logic
 
-**Additional context**
+#### Additional context
