@@ -5,9 +5,18 @@ class ThemesController < ApplicationController
   def create
     theme = Theme.new(theme_params)
     if theme.save
-      render json: ThemeSerializer.new(theme), status: :ok
+      render_success(theme)
     else
-      render json: wrong_attribute(theme.errors.full_messages), status: :unprocessable_entity
+      render_errors(theme)
+    end
+  end
+
+  def update
+    theme = Theme.find(params[:id])
+    if theme.update_attributes(theme_params)
+      render_success(theme)
+    else
+      render_errors(theme)
     end
   end
 
@@ -15,6 +24,14 @@ class ThemesController < ApplicationController
 
   def theme_params
     params.permit(:title)
+  end
+
+  def render_success(theme)
+    render json: ThemeSerializer.new(theme), status: :ok
+  end
+
+  def render_errors(theme)
+    render json: wrong_attribute(theme.errors.full_messages), status: :unprocessable_entity
   end
 
   def wrong_attribute(errors)
