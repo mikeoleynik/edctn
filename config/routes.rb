@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   root 'home#homepage'
 
   resources :users, only: :create
+  resources :themes
 end
