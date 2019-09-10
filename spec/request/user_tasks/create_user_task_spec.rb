@@ -1,18 +1,16 @@
 require 'rails_helper'
 
-describe 'Create task', type: :request do
-  describe 'POST /task' do
+describe 'Create user task', type: :request do
+  describe 'POST /user_task' do
     let!(:user) { create(:user) }
     let!(:theme) { create(:theme) }
+    let!(:task) { create(:task, theme: theme) }
 
     context 'authorized' do
       context 'valid attributes' do
         before {
           sign_in user
-          post '/tasks', params: { title: Faker::Educator.subject,
-                                   body: Faker::Lorem.paragraph,
-                                   difficulty: rand(1..10),
-                                   theme_id: theme.id }
+          post '/user_tasks', params: { user_id: user.id, task_id: task.id }
         }
 
         it 'return status 200' do
@@ -22,12 +20,16 @@ describe 'Create task', type: :request do
         it 'return data in the response' do
           expect(json_response).to have_key('data')
         end
+
+        it 'the task is added to the user' do
+          expect(user.tasks.first).to eq(task)
+        end
       end
 
       context 'invalid attributes' do
         before {
           sign_in user
-          post '/tasks', params: { title: nil }
+          post '/user_tasks', params: { user_id: user.id }
         }
 
         it 'return status 422' do
@@ -42,7 +44,7 @@ describe 'Create task', type: :request do
 
     context 'unauthorized' do
       it 'return 401 status if user is not authorized' do
-        post '/tasks'
+        post '/user_tasks'
         expect(response.status).to eq 302
       end
     end

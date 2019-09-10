@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   resources :users, only: :create
   resources :themes
   resources :tasks
+  resources :user_tasks, only: [:create, :destroy]
 end

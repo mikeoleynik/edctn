@@ -4,7 +4,7 @@ class CreateTasks < ActiveRecord::Migration[5.2]
       t.string  :title, null: false
       t.text    :body, null: false
       t.integer :difficulty, null: false
-      t.integer :theme_id
+      t.integer :theme_id, null: false, index: true
 
       t.timestamps
     end
