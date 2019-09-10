@@ -11,6 +11,16 @@ class TasksController < ApplicationController
     end
   end
 
+  # PATCH /tasks/:id
+  def update
+    task = Task.find(params[:id])
+    if task.update_attributes(task_params)
+      render_success(task)
+    else
+      render_errors(task)
+    end
+  end
+
   private
 
   def task_params
