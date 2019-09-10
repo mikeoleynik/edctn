@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Update theme', type: :request do
-  describe 'PATCH /themes' do
+  describe 'PATCH /themes/:id' do
     let!(:user) { create(:user) }
     let!(:theme) { create(:theme) }
 

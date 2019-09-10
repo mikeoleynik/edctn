@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ThemesController < ApplicationController
-  # GET /
+  # POST /themes
   def create
     theme = Theme.new(theme_params)
     if theme.save
@@ -11,6 +11,7 @@ class ThemesController < ApplicationController
     end
   end
 
+  # PATCH /themes/:id
   def update
     theme = Theme.find(params[:id])
     if theme.update_attributes(theme_params)
@@ -18,6 +19,13 @@ class ThemesController < ApplicationController
     else
       render_errors(theme)
     end
+  end
+
+  # DELETE /themes/:id
+  def destroy
+    theme = Theme.find(params[:id])
+    theme.destroy
+    render json: {}, status: :no_content
   end
 
   private
