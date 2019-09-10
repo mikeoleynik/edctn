@@ -21,6 +21,13 @@ class TasksController < ApplicationController
     end
   end
 
+  # DELETE /tasks/:id
+  def destroy
+    task = Task.find(params[:id])
+    task.destroy
+    render json: {}, status: :no_content
+  end
+
   private
 
   def task_params
