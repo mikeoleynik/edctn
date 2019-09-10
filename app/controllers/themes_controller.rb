@@ -35,21 +35,10 @@ class ThemesController < ApplicationController
   end
 
   def render_success(theme)
-    render json: ThemeSerializer.new(theme), status: :ok
+    render json: ThemeSerializer.new(theme).serialized_json, status: :ok
   end
 
   def render_errors(theme)
     render json: wrong_attribute(theme.errors.full_messages), status: :unprocessable_entity
-  end
-
-  def wrong_attribute(errors)
-    {
-      "errors": [
-        {
-          "status": '422',
-          "detail": errors
-        }
-      ]
-    }
   end
 end
