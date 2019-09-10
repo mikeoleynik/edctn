@@ -6,6 +6,25 @@ describe 'Create task', type: :request do
     let!(:theme) { create(:theme) }
 
     context 'authorized' do
+      context 'valid attributes with users' do
+        before {
+          sign_in user
+          post '/tasks', params: { title: Faker::Educator.subject,
+                                   body: Faker::Lorem.paragraph,
+                                   difficulty: rand(1..10),
+                                   theme_id: theme.id,
+                                   users: [user.id]}
+        }
+
+        it 'return status 200' do
+          expect(response.status).to eq 200
+        end
+
+        it 'the task is added to the user' do
+          expect(user.tasks).not_to be_empty
+        end
+      end
+
       context 'valid attributes' do
         before {
           sign_in user

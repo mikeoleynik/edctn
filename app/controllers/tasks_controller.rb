@@ -5,6 +5,7 @@ class TasksController < ApplicationController
   def create
     task = Task.new(task_params)
     if task.save
+      params[:users].each{ |user_id| UserTask.create(task_id: task.id, user_id: user_id) } if params[:users].present?
       render_success(task)
     else
       render_errors(task)
