@@ -6,7 +6,7 @@ class TasksController < ApplicationController
     task = Task.new(task_params)
 
     if task.save
-      render_success(task)
+      render_success(TaskSerializer.new(task))
     else
       render_errors(task)
     end
@@ -17,7 +17,7 @@ class TasksController < ApplicationController
     task = Task.find(params[:id])
 
     if task.update_attributes(task_params)
-      render_success(task)
+      render_success(TaskSerializer.new(task))
     else
       render_errors(task)
     end
@@ -35,13 +35,5 @@ class TasksController < ApplicationController
   def task_params
     params.permit(:title, :body, :difficulty, :theme_id, picture_attributes: %i[image id _destroy],
                                                          user_tasks_attributes: %i[id task_id user_id _destroy])
-  end
-
-  def render_success(task)
-    render json: TaskSerializer.new(task).serialized_json, status: :ok
-  end
-
-  def render_errors(task)
-    render json: wrong_attribute(task.errors.full_messages), status: :unprocessable_entity
   end
 end

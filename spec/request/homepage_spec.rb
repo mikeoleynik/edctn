@@ -19,7 +19,7 @@ describe 'Visit to homepage', type: :request do
     end
 
     context 'unauthorized' do
-      it 'return 401 status if header Authorization is invalid ' do
+      it 'return 302 status if user unauthorized' do
         get '/'
         expect(response.status).to eq 302
       end
