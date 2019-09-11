@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-class UserTaskSerializer
-  include FastJsonapi::ObjectSerializer
+class UserTaskSerializer < BaseSerializer
   attributes :user_id, :task_id
 end

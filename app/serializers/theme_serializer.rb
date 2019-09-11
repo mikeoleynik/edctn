@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-class ThemeSerializer
-  include FastJsonapi::ObjectSerializer
+class ThemeSerializer < BaseSerializer
   attributes :title
 end
