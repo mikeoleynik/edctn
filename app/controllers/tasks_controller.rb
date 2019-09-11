@@ -3,9 +3,11 @@
 class TasksController < ApplicationController
   # POST /tasks
   def create
+    user_ids = params[:users]
     task = Task.new(task_params)
+
     if task.save
-      params[:users].each{ |user_id| UserTask.create(task_id: task.id, user_id: user_id) } if params[:users].present?
+      user_ids.each { |user_id| UserTask.create(task_id: task.id, user_id: user_id) } if user_ids.present?
       render_success(task)
     else
       render_errors(task)
