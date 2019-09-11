@@ -11,4 +11,5 @@ class Task < ApplicationRecord
   validates :difficulty, numericality: { only_integer: true, less_than_or_equal_to: 10 }
 
   accepts_nested_attributes_for :picture
+  accepts_nested_attributes_for :user_tasks
 end

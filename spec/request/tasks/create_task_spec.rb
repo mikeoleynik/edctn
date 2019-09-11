@@ -13,7 +13,7 @@ describe 'Create task', type: :request do
                                    body: Faker::Lorem.paragraph,
                                    difficulty: rand(1..10),
                                    theme_id: theme.id,
-                                   users: [user.id]}
+                                   user_tasks_attributes: [{user_id: user.id}]}
         }
 
         it 'return status 200' do
