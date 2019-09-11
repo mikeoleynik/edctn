@@ -25,6 +25,26 @@ describe 'Create task', type: :request do
         end
       end
 
+      context 'valid attributes with pictures' do
+        before {
+          sign_in user
+          post '/tasks', params: { title: Faker::Educator.subject,
+                                   body: Faker::Lorem.paragraph,
+                                   difficulty: rand(1..10),
+                                   theme_id: theme.id,
+                                   picture_attributes: {image: Rack::Test::UploadedFile.new(Rails.root.join('spec/support/images/image.png'), 'image/png')}}
+        }
+
+        it 'return status 200' do
+          expect(response.status).to eq 200
+        end
+
+        it 'the picture is added to the task' do
+          task = Task.last
+          expect(task.picture).to eql(Picture.last)
+        end
+      end
+
       context 'valid attributes' do
         before {
           sign_in user

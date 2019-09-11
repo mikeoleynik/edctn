@@ -34,7 +34,7 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.permit(:title, :body, :difficulty, :theme_id)
+    params.permit(:title, :body, :difficulty, :theme_id, picture_attributes: [:image, :id, :_destroy])
   end
 
   def render_success(task)
