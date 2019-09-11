@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 2019_09_11_072214) do
   enable_extension "plpgsql"
 
   create_table "pictures", force: :cascade do |t|
-    t.string "image"
+    t.string "image", null: false
     t.integer "task_id"
     t.index ["task_id"], name: "index_pictures_on_task_id"
   end
@@ -38,8 +38,8 @@ ActiveRecord::Schema.define(version: 2019_09_11_072214) do
   end
 
   create_table "user_tasks", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "task_id"
+    t.bigint "user_id", null: false
+    t.bigint "task_id", null: false
     t.index ["task_id"], name: "index_user_tasks_on_task_id"
     t.index ["user_id"], name: "index_user_tasks_on_user_id"
   end
