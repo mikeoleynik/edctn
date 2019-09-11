@@ -13,13 +13,8 @@ describe 'Update task', type: :request do
           patch "/tasks/#{task.id}", params: { title: 'Optimization - #1' }
         }
 
-        it 'return status 200' do
-          expect(response.status).to eq 200
-        end
-
-        it 'return data in the response' do
-          expect(json_response).to have_key('data')
-        end
+        it_behaves_like 'status 200'
+        it_behaves_like 'success data'
 
         it 'return task with new title' do
           new_title = json_response.dig('data', 'attributes', 'title')

@@ -10,13 +10,8 @@ describe 'Send invite', type: :request do
         post '/users'
       }
 
-      it 'return status 200' do
-        expect(response.status).to eq 200
-      end
-
-      it 'return data in the response' do
-        expect(json_response).to have_key('data')
-      end
+      it_behaves_like 'status 200'
+      it_behaves_like 'success data'
     end
 
     context 'unauthorized' do

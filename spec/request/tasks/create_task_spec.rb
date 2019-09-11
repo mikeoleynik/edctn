@@ -16,9 +16,7 @@ describe 'Create task', type: :request do
                                    user_tasks_attributes: [{user_id: user.id}]}
         }
 
-        it 'return status 200' do
-          expect(response.status).to eq 200
-        end
+        it_behaves_like 'status 200'
 
         it 'the task is added to the user' do
           expect(user.tasks).not_to be_empty
@@ -35,9 +33,7 @@ describe 'Create task', type: :request do
                                    picture_attributes: {image: Rack::Test::UploadedFile.new(Rails.root.join('spec/support/images/image.png'), 'image/png')}}
         }
 
-        it 'return status 200' do
-          expect(response.status).to eq 200
-        end
+        it_behaves_like 'status 200'
 
         it 'the picture is added to the task' do
           task = Task.last
@@ -54,13 +50,8 @@ describe 'Create task', type: :request do
                                    theme_id: theme.id }
         }
 
-        it 'return status 200' do
-          expect(response.status).to eq 200
-        end
-
-        it 'return data in the response' do
-          expect(json_response).to have_key('data')
-        end
+        it_behaves_like 'status 200'
+        it_behaves_like 'success data'
       end
 
       context 'invalid attributes' do

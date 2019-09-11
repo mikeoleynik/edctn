@@ -11,13 +11,8 @@ describe 'Create theme', type: :request do
           post '/themes', params: { title: Faker::Educator.subject }
         }
 
-        it 'return status 200' do
-          expect(response.status).to eq 200
-        end
-
-        it 'return data in the response' do
-          expect(json_response).to have_key('data')
-        end
+        it_behaves_like 'status 200'
+        it_behaves_like 'success data'
       end
 
       context 'invalid attributes' do

@@ -13,13 +13,8 @@ describe 'Create user task', type: :request do
           post '/user_tasks', params: { user_id: user.id, task_id: task.id }
         }
 
-        it 'return status 200' do
-          expect(response.status).to eq 200
-        end
-
-        it 'return data in the response' do
-          expect(json_response).to have_key('data')
-        end
+        it_behaves_like 'status 200'
+        it_behaves_like 'success data'
 
         it 'the task is added to the user' do
           expect(user.tasks.first).to eq(task)
