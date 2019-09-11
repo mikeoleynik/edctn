@@ -14,13 +14,13 @@ describe 'Send invite', type: :request do
         expect(response.status).to eq 200
       end
 
-      it 'success exist in the response' do
-        expect(json_response['success']).to match(/invite sent/)
+      it 'return data in the response' do
+        expect(json_response).to have_key('data')
       end
     end
 
     context 'unauthorized' do
-      it 'return 401 status if header Authorization is invalid ' do
+      it 'return 302 status if user unauthorized' do
         post '/users'
         expect(response.status).to eq 302
       end

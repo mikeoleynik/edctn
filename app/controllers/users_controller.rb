@@ -3,7 +3,7 @@
 class UsersController < ApplicationController
   # POST /users
   def create
-    User.invite!(email: 'new_user@example.com', fullname: 'John Doe')
-    render json: { success: 'invite sent' }, status: :ok
+    user = User.invite!(email: 'new_user@example.com', fullname: 'John Doe')
+    render_success(UserSerializer.new(user))
   end
 end
