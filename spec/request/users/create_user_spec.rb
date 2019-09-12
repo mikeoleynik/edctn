@@ -10,17 +10,12 @@ describe 'Send invite', type: :request do
         post '/users'
       }
 
-      it 'return status 200' do
-        expect(response.status).to eq 200
-      end
-
-      it 'success exist in the response' do
-        expect(json_response['success']).to match(/invite sent/)
-      end
+      it_behaves_like 'status 200'
+      it_behaves_like 'success data'
     end
 
     context 'unauthorized' do
-      it 'return 401 status if header Authorization is invalid ' do
+      it 'return 302 status if user unauthorized' do
         post '/users'
         expect(response.status).to eq 302
       end

@@ -9,6 +9,8 @@ gem 'puma', '~> 3.11'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'haml-rails', '~> 2.0'
 gem 'devise_invitable', '~> 2.0.0'
+gem 'fast_jsonapi'
+gem 'carrierwave', '~> 2.0'
 
 group :development, :test do
   gem 'pry-byebug'
