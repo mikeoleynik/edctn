@@ -14,7 +14,7 @@ class ThemesController < ApplicationController
   # PATCH /themes/:id
   def update
     theme = Theme.find(params[:id])
-    if theme.update_attributes(theme_params)
+    if theme.update(theme_params)
       render_success(ThemeSerializer.new(theme))
     else
       render_errors(theme)
