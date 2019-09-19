@@ -65,7 +65,7 @@ describe 'Create task', type: :request do
         end
 
         it 'return errors in the response' do
-          expect(json_response).to have_key('errors')
+          expect(json_response).to have_jsonapi_errors
         end
       end
     end

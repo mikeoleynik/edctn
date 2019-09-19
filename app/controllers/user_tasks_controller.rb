@@ -8,7 +8,7 @@ class UserTasksController < ApplicationController
     if user_task.save
       render_success(UserTaskSerializer.new(user_task))
     else
-      render_errors(user_task)
+      respond_with_errors(user_task)
     end
   end
 

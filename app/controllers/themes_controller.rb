@@ -7,7 +7,7 @@ class ThemesController < ApplicationController
     if theme.save
       render_success(ThemeSerializer.new(theme))
     else
-      render_errors(theme)
+      respond_with_errors(theme)
     end
   end
 
@@ -17,7 +17,7 @@ class ThemesController < ApplicationController
     if theme.update(theme_params)
       render_success(ThemeSerializer.new(theme))
     else
-      render_errors(theme)
+      respond_with_errors(theme)
     end
   end
 

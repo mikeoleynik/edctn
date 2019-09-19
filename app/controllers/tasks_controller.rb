@@ -8,7 +8,7 @@ class TasksController < ApplicationController
     if task.save
       render_success(TaskSerializer.new(task))
     else
-      render_errors(task)
+      respond_with_errors(task)
     end
   end
 
@@ -19,7 +19,7 @@ class TasksController < ApplicationController
     if task.update_attributes(task_params)
       render_success(TaskSerializer.new(task))
     else
-      render_errors(task)
+      respond_with_errors(task)
     end
   end
 
