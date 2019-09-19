@@ -3,13 +3,9 @@
 class TasksController < ApplicationController
   # POST /tasks
   def create
-    task = Task.new(task_params)
+    task = CreateTask.new(task_params)
 
-    if task.save
-      render_success(TaskSerializer.new(task))
-    else
-      respond_with_errors(task)
-    end
+    render json: task.save, status: task.status
   end
 
   # PATCH /tasks/:id
