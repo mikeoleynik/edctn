@@ -1,26 +1,14 @@
 require 'rails_helper'
 
-describe 'Create theme', type: :request do
+describe 'Create Node', type: :request do
   describe 'POST /themes' do
     let!(:user) { create(:user) }
-    let!(:task) { create(:task) }
 
     context 'authorized' do
       context 'valid attributes' do
         before {
           sign_in user
           post '/themes', params: { title: Faker::Educator.subject }
-        }
-
-        it_behaves_like 'status 200'
-        it_behaves_like 'success data'
-      end
-
-      context 'valid attributes with tasks' do
-        before {
-          sign_in user
-          post '/themes', params: { title: Faker::Educator.subject,
-                                    nodes_attributes: [{task_id: task.id}] }
         }
 
         it_behaves_like 'status 200'

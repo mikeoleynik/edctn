@@ -31,6 +31,6 @@ class ThemesController < ApplicationController
   private
 
   def theme_params
-    params.permit(:title)
+    params.permit(:title, nodes_attributes: %i[id task_id theme_id _destroy])
   end
 end
