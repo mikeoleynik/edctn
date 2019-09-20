@@ -4,6 +4,7 @@ describe 'Update theme', type: :request do
   describe 'PATCH /themes/:id' do
     let!(:user) { create(:user) }
     let!(:theme) { create(:theme) }
+    let!(:task) { create(:task) }
 
     context 'authorized' do
       context 'valid attributes' do
@@ -19,6 +20,17 @@ describe 'Update theme', type: :request do
           new_title = json_response.dig('data', 'attributes', 'title')
           expect(new_title).to eql('Optimization')
         end
+      end
+
+      context 'valid attributes with tasks' do
+        before {
+          sign_in user
+          patch "/themes/#{theme.id}", params: { title: 'Optimization',
+                                                 nodes_attributes: [{task_id: task.id}] }
+        }
+
+        it_behaves_like 'status 200'
+        it_behaves_like 'success data'
       end
 
       context 'invalid attributes' do
