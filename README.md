@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/mikeoleynik/edctn.svg?branch=master)](https://travis-ci.org/mikeoleynik/edctn)
+
 ## Getting Started
 
 This section provides quick start guide.
