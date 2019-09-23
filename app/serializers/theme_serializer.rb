@@ -12,4 +12,6 @@
 
 class ThemeSerializer < BaseSerializer
   attributes :title
+
+  has_many :tasks
 end
