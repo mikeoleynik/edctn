@@ -1,5 +1,17 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: tasks
+#
+#  id         :bigint           not null, primary key
+#  title      :string           not null
+#  body       :text             not null
+#  difficulty :integer          not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 class Task < ApplicationRecord
   has_one :picture, dependent: :destroy
   has_many :user_tasks, dependent: :destroy

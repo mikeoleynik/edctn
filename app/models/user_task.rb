@@ -1,5 +1,16 @@
 # frozen_string_literal: true
 
+# Join table for User and Task
+
+# == Schema Information
+#
+# Table name: user_tasks
+#
+#  id      :bigint           not null, primary key
+#  user_id :bigint           not null
+#  task_id :bigint           not null
+#
+
 class UserTask < ApplicationRecord
   belongs_to :user
   belongs_to :task

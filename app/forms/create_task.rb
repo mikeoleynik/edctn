@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+# FormObject to create task and nested object.
+# Associate tasks with users, themes, and picture.
+
 class CreateTask
   include ActiveModel::Model
 
