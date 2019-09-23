@@ -11,6 +11,8 @@ class CreateTask
   validates :title, :body, :difficulty, presence: true
   validates :difficulty, numericality: { only_integer: true, less_than_or_equal_to: 10 }
 
+  # Creates a Task and associate it with a user, theme, and image
+  # Returns JSON API response for Task (:title, :body, :difficulty)
   def save
     if valid?
       task = Task.create!(title: title, body: body, difficulty: difficulty)
@@ -29,6 +31,7 @@ class CreateTask
 
   private
 
+  # Creates associate with User
   def create_user_task(task_id)
     user_tasks_attributes.each do |attribute|
       user_id = attribute['user_id']
@@ -37,6 +40,7 @@ class CreateTask
     end
   end
 
+  # Creates associate with Theme
   def create_nodes(task_id)
     nodes_attributes.each do |attribute|
       theme_id = attribute['theme_id']

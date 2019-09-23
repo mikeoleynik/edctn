@@ -5,6 +5,6 @@ class TaskMailer < ApplicationMailer
     email = User.find(params[:user]).email
     @task = Task.find(params[:task]).title
 
-    mail(to: email, subject: t(:subject, scope: [:mailers, :task, :create_task]))
+    mail(to: email, subject: t(:subject, scope: %i[mailers task create_task]))
   end
 end
