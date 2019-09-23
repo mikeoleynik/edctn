@@ -4,7 +4,7 @@ describe 'Delete task', type: :request do
   describe 'DELETE /tasks/:id' do
     let!(:user) { create(:user) }
     let!(:theme) { create(:theme) }
-    let!(:task) { create(:task, theme: theme) }
+    let!(:task) { create(:task) }
 
     context 'authorized' do
       before {

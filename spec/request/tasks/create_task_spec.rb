@@ -54,6 +54,19 @@ describe 'Create task', type: :request do
         it_behaves_like 'success data'
       end
 
+      context 'valid attributes with theme' do
+        before {
+          sign_in user
+          post '/tasks', params: { title: Faker::Educator.subject,
+                                   body: Faker::Lorem.paragraph,
+                                   difficulty: rand(1..10),
+                                   nodes_attributes: [{theme_id: theme.id}] }
+        }
+
+        it_behaves_like 'status 200'
+        it_behaves_like 'success data'
+      end
+
       context 'invalid attributes' do
         before {
           sign_in user

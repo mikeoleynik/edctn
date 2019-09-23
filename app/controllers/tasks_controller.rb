@@ -29,7 +29,8 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.permit(:title, :body, :difficulty, :theme_id, picture_attributes: %i[image id _destroy],
-                                                         user_tasks_attributes: %i[id task_id user_id _destroy])
+    params.permit(:title, :body, :difficulty, picture_attributes: %i[image id _destroy],
+                                              user_tasks_attributes: %i[id task_id user_id _destroy],
+                                              nodes_attributes: %i[id task_id theme_id _destroy])
   end
 end

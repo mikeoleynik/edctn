@@ -4,7 +4,7 @@ describe 'Update task', type: :request do
   describe 'PATCH /task/:id' do
     let!(:user) { create(:user) }
     let!(:theme) { create(:theme) }
-    let!(:task) { create(:task, theme: theme) }
+    let!(:task) { create(:task) }
 
     context 'authorized' do
       context 'valid attributes' do

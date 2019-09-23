@@ -3,16 +3,16 @@
 class CreateTask
   include ActiveModel::Model
 
-  attr_accessor :title, :body, :difficulty, :theme_id, :picture_attributes,
-                :user_tasks_attributes
+  attr_accessor :title, :body, :difficulty, :picture_attributes, :user_tasks_attributes, :nodes_attributes
 
   validates :title, :body, :difficulty, presence: true
   validates :difficulty, numericality: { only_integer: true, less_than_or_equal_to: 10 }
 
   def save
     if valid?
-      task = Task.create!(title: title, body: body, difficulty: difficulty, theme_id: theme_id)
+      task = Task.create!(title: title, body: body, difficulty: difficulty)
       task.create_picture(image: picture_attributes[:image]) if picture_attributes.present?
+      create_nodes(task.id) if nodes_attributes.present?
       create_user_task(task.id) if user_tasks_attributes.present?
       TaskSerializer.new(task)
     else
@@ -31,6 +31,13 @@ class CreateTask
       user_id = attribute['user_id']
       UserTask.create(user_id: user_id, task_id: task_id)
       TaskMailer.with(user: user_id, task: task_id).create_task.deliver_later
+    end
+  end
+
+  def create_nodes(task_id)
+    nodes_attributes.each do |attribute|
+      theme_id = attribute['theme_id']
+      Node.create(theme_id: theme_id, task_id: task_id)
     end
   end
 end

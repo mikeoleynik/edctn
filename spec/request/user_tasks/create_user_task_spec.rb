@@ -4,7 +4,7 @@ describe 'Create user task', type: :request do
   describe 'POST /user_task' do
     let!(:user) { create(:user) }
     let!(:theme) { create(:theme) }
-    let!(:task) { create(:task, theme: theme) }
+    let!(:task) { create(:task) }
 
     context 'authorized' do
       context 'valid attributes' do
