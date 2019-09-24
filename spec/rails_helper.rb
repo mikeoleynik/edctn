@@ -15,8 +15,10 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
-  config.include RequestMacros, type: :request
-  config.include Devise::Test::IntegrationHelpers, type: :request
+  # config.include RequestMacros, type: :request
+  # config.include Devise::Test::IntegrationHelpers, type: :request
+  config.include Devise::Test::ControllerHelpers, :type => :controller
+  config.extend ControllerMacros, :type => :controller
 
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
@@ -32,8 +34,6 @@ RSpec.configure do |config|
   end
 
   config.use_transactional_fixtures = true
-
   config.infer_spec_type_from_file_location!
-
   config.filter_rails_from_backtrace!
 end

@@ -12,7 +12,7 @@ class TasksController < ApplicationController
   def update
     task = Task.find(params[:id])
 
-    if task.update_attributes(task_params)
+    if task.update(task_params)
       render_success(TaskSerializer.new(task))
     else
       respond_with_errors(task)

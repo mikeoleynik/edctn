@@ -1,36 +1,31 @@
 require 'rails_helper'
 
-describe 'Create theme', type: :request do
-  describe 'POST /themes' do
-    let!(:user) { create(:user) }
+describe UserTasksController do
+  describe 'POST /user_tasks' do
+    subject(:json_response) { JSON.parse(response.body) }
+
     let!(:task) { create(:task) }
+    let!(:user) { create(:user) }
 
     context 'authorized' do
+      login_user(:user)
+
       context 'valid attributes' do
         before {
-          sign_in user
-          post '/themes', params: { title: Faker::Educator.subject }
+          post :create, params: { user_id: user.id, task_id: task.id }
         }
 
         it_behaves_like 'status 200'
         it_behaves_like 'success data'
-      end
 
-      context 'valid attributes with tasks' do
-        before {
-          sign_in user
-          post '/themes', params: { title: Faker::Educator.subject,
-                                    nodes_attributes: [{task_id: task.id}] }
-        }
-
-        it_behaves_like 'status 200'
-        it_behaves_like 'success data'
+        it 'the task is added to the user' do
+          expect(user.tasks.first).to eq(task)
+        end
       end
 
       context 'invalid attributes' do
         before {
-          sign_in user
-          post '/themes', params: { title: nil }
+          post :create, params: { user_id: user.id }
         }
 
         it 'return status 422' do
@@ -45,7 +40,7 @@ describe 'Create theme', type: :request do
 
     context 'unauthorized' do
       it 'return 401 status if user is not authorized' do
-        post '/themes'
+        post :create
         expect(response.status).to eq 302
       end
     end
