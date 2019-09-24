@@ -1,14 +1,20 @@
 # frozen_string_literal: true
 
+# Join table for User and Task
+
+# == Schema Information
+#
+# Table name: user_tasks
+#
+#  id      :bigint           not null, primary key
+#  user_id :bigint           not null
+#  task_id :bigint           not null
+#
+
 class UserTask < ApplicationRecord
   belongs_to :user
   belongs_to :task
 
-  after_commit :create_task
-
-  private
-
-  def create_task
-    TaskMailer.with(user: user_id, task: task_id).create_task.deliver_later
-  end
+  validates :user_id, uniqueness: { scope: :task_id,
+                                    message: 'The student is already doing this task' }
 end

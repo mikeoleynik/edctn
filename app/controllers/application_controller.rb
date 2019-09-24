@@ -7,18 +7,7 @@ class ApplicationController < ActionController::API
     render json: serializer.serialized_json, status: :ok
   end
 
-  def render_errors(task)
-    render json: wrong_attribute(task.errors.full_messages), status: :unprocessable_entity
-  end
-
-  def wrong_attribute(errors)
-    {
-      "errors": [
-        {
-          "status": '422',
-          "detail": errors
-        }
-      ]
-    }
+  def respond_with_errors(object)
+    render json: { errors: ErrorSerializer.serialize(object) }, status: :unprocessable_entity
   end
 end

@@ -1,13 +1,13 @@
 require 'rails_helper'
 
-describe 'Send invite', type: :request do
-  describe 'GET /invite' do
-    let!(:user) { create(:user) }
+describe UsersController do
+  describe 'POST /users' do
+    subject(:json_response) { JSON.parse(response.body) }
 
     context 'authorized' do
+      login_user(:user)
       before {
-        sign_in user
-        post '/users'
+        post :create
       }
 
       it_behaves_like 'status 200'
@@ -16,7 +16,7 @@ describe 'Send invite', type: :request do
 
     context 'unauthorized' do
       it 'return 302 status if user unauthorized' do
-        post '/users'
+        post :create
         expect(response.status).to eq 302
       end
     end

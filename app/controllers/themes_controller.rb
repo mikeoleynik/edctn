@@ -7,7 +7,7 @@ class ThemesController < ApplicationController
     if theme.save
       render_success(ThemeSerializer.new(theme))
     else
-      render_errors(theme)
+      respond_with_errors(theme)
     end
   end
 
@@ -17,7 +17,7 @@ class ThemesController < ApplicationController
     if theme.update(theme_params)
       render_success(ThemeSerializer.new(theme))
     else
-      render_errors(theme)
+      respond_with_errors(theme)
     end
   end
 
@@ -31,6 +31,6 @@ class ThemesController < ApplicationController
   private
 
   def theme_params
-    params.permit(:title)
+    params.permit(:title, nodes_attributes: %i[id task_id theme_id _destroy])
   end
 end

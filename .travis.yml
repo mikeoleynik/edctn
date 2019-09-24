@@ -1,0 +1,15 @@
+language: ruby
+rvm:
+  - 2.6.3
+
+addons:
+  postgresql: '10'
+
+before_script:
+  - sudo /etc/init.d/postgresql restart
+  - cp config/database.yml.sample config/database.yml
+  - psql -c 'create database rock_test;' -U postgres
+
+script:
+  - bundle exec rails db:migrate RAILS_ENV=test
+  - bundle exec rspec

@@ -4,7 +4,7 @@ RSpec.describe TaskMailer, type: :mailer do
   describe "Checking contents" do
     let(:user) { create(:user) }
     let(:theme) { create(:theme) }
-    let(:task) { create(:task, theme: theme) }
+    let(:task) { create(:task) }
     let(:mail) { TaskMailer.with(user: user.id, task: task.id).create_task }
 
     it 'renders the subject' do

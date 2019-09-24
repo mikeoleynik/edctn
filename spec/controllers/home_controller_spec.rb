@@ -1,13 +1,14 @@
 require 'rails_helper'
 
-describe 'Visit to homepage', type: :request do
+describe HomeController do
   describe 'GET /' do
-    let!(:user) { create(:user) }
+
+
+    subject(:json_response) { JSON.parse(response.body) }
+
     context 'authorized' do
-      before {
-        sign_in user
-        get '/'
-      }
+      login_user(:user)
+      before { get :homepage }
 
       it 'return status 200' do
         expect(response.status).to eq 200
@@ -20,7 +21,7 @@ describe 'Visit to homepage', type: :request do
 
     context 'unauthorized' do
       it 'return 302 status if user unauthorized' do
-        get '/'
+        get :homepage
         expect(response.status).to eq 302
       end
     end
