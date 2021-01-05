@@ -1,5 +1,9 @@
 [![Build Status](https://travis-ci.org/mikeoleynik/edctn.svg?branch=master)](https://travis-ci.org/mikeoleynik/edctn)
 
+<p align="center"> 
+  <img src="edctn.png" alt="edctn logo"/> 
+</p>
+
 ## Getting Started
 
 This section provides quick start guide.
