@@ -1,0 +1,97 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:11
+        ports: ['5432:5432']
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Ruby
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.6.x
+
+      - name: Install library for postgres
+        run: sudo apt-get install libpq-dev
+
+      - name: Install gems
+        run: |
+          gem install bundler
+          bundle install
+
+      - name: Setup database
+        env:
+          DATABASE_URL: postgres://postgres:@localhost:5432/rock_test
+        run: |
+          cp config/database.yml.sample config/database.yml
+          bundle exec rails db:create db:migrate
+
+      - name: RSpec
+        run: bundle exec rspec spec
+
+  rubocop:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Ruby
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.6.x
+
+      - name: Install rubocop
+        run: gem install rubocop
+
+      - name: Rubocop
+        run: bundle exec rubocop
+
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Ruby
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.6.x
+
+      - name: Install security gems
+        run: |
+          gem install brakeman
+          gem install bundler-audit
+
+      - name: Run Brakeman
+        run: bundle exec brakeman -q
+
+      - name: Run bundler-audit
+        run: bundle exec bundle audit check --update
+
+  leak:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Ruby
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.6.x
+
+      - name: Install bundler-leak
+        run: gem install bundler-leak
+
+      - name: Run bundler-leak
+        run: bundle exec bundle leak check --update
