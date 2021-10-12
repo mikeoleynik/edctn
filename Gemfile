@@ -5,7 +5,7 @@ ruby '2.6.3'
 
 gem 'rails', '~> 5.2.3'
 gem 'pg', '>= 0.18', '< 2.0'
-gem 'puma', '~> 3.11'
+gem 'puma', '~> 4.3'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'haml-rails', '~> 2.0'
 gem 'devise_invitable', '~> 2.0.0'
