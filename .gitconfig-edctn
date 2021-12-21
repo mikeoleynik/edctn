@@ -1,0 +1,12 @@
+[user]
+	name = mikeoleynik
+	email = oleynik.mike@yandex.ru
+[includeIf "gitdir:~/edctn/"]
+  path = .gitconfig-edctn
+[core]
+	autocrlf = input
+	filemode = false
+[push]
+	default = current
+[merge]
+	conflictstyle = diff3
